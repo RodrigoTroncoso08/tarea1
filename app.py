@@ -1,5 +1,6 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
+import hashlib
 
 app = Flask(__name__)
 
