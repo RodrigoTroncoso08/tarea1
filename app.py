@@ -11,8 +11,8 @@ def hello():
 @app.route('/validarFirma', methods=['POST'])
 def validar():
     valid = False
-    message = request.form['mensaje']
-    hashU = request.form['hash']
+    message = request.form["mensaje"]
+    hashU = request.form["hash"]
 
     m = hashlib.sha256()
     m.update(message)
