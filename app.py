@@ -1,8 +1,7 @@
 import os
 from flask import Flask, request, jsonify, make_response
 import hashlib
-import types
-import urllib.request
+from urllib.request import urlopen
 
 app = Flask(__name__)
 
@@ -33,9 +32,9 @@ def stat():
 
 @app.route('/texto', methods=['GET'])
 def text():
-	texto = urllib.request.urlopen("https://s3.amazonaws.com/files.principal/texto.txt").read()
-	hText = texto.encode("utf-8")
-	m = hashlib.sha256()
+    texto = urlopen("https://s3.amazonaws.com/files.principal/texto.txt").read()
+    hText = texto.encode("utf-8")
+    m = hashlib.sha256()
     m.update(hText)
     hashr = m.hexdigest()
     return jsonify({'mensaje': texto ,'hash' : hashr})
