@@ -1,6 +1,7 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 import hashlib
+import types
 
 app = Flask(__name__)
 
@@ -14,6 +15,8 @@ def validar():
     message = request.form["mensaje"]
     hashU = request.form["hash"]
 
+    message=  message.encode("utf-8")
+
     m = hashlib.sha256()
     m.update(message)
     hashr = m.hexdigest()
@@ -22,6 +25,10 @@ def validar():
         valid=True
 
     return jsonify({'mensaje': message ,'valido' : valid , 'hashU' : hashU,'hashr' : hashr})
+
+@app.route('/status', methods=['GET'])
+def stat():
+	return  make_response(" ", 201)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))
