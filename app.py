@@ -16,11 +16,11 @@ def validar():
 
     m = hashlib.sha256()
     m.update(message)
-    hashr = m.Hexdigest
+    hashr = m.hexdigest
     if hashr==hashU:
         valid=True
 
-    return jsonify( mensaje=message, valido = valid)
+    return jsonify( {'mensaje': message}, {'valido' : valid})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT',5000))
